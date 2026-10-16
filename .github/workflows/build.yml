@@ -1,0 +1,28 @@
+name: Build deb
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Theos
+        uses: Randomblock1/theos-action@v1
+
+      - name: Build package
+        run: make clean package FINALPACKAGE=1
+
+      - name: Show architectures
+        run: |
+          mkdir -p x && dpkg-deb -x packages/*.deb x
+          find x -type f \( -name '*.dylib' -o -path '*Prefs.bundle/CydiaWebviewModifierPrefs' \) -exec file {} \;
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CydiaWebviewModifier-deb
+          path: packages/*.deb
