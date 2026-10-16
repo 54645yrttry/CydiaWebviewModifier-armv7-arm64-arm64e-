@@ -1,0 +1,9 @@
+Package: com.lukezgd.cydiawebviewmodifier
+Name: Cydia Webview Modifier
+Version: 1.0.1
+Architecture: iphoneos-arm
+Description: Modify URL loaded in Cydia webviews
+Maintainer: LukeZGD
+Author: LukeZGD
+Section: Tweaks
+Depends: cydia, mobilesubstrate (>= 0.9.5000), preferenceloader
